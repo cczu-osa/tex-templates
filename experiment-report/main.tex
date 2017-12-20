@@ -1,0 +1,87 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{xfrac}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{minted}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{dblfloatfix}
+
+% 设置页面
+\geometry{hmargin=3.18cm, vmargin=2.54cm} % 页边距
+\pagestyle{fancy}
+\fancyhf{}
+\chead{常州大学实验报告} % 页眉
+\renewcommand{\headwidth}{\textwidth} % 页眉分割横线
+\cfoot{第 \thepage 页，共 \pageref{LastPage} 页} % 页脚，显示页码
+
+% 设置字体
+\setmainfont{Times New Roman}
+\setsansfont{Arial}
+\setCJKsansfont{Microsoft YaHei}
+\setmonofont[Scale=0.95]{Consolas}
+\setCJKmonofont[Scale=0.95]{Microsoft YaHei}
+
+% 设置代码默认显示效果
+\setminted{autogobble, baselinestretch=1, frame=lines, framesep=4mm, style=vs, stripnl, tabsize=4}
+
+% 图片目录
+\graphicspath{ {images/} }
+
+\begin{document}
+
+    % 封面
+    \begin{titlepage}
+
+        \begin{center}
+            \marginbox{0cm 0cm 0cm 3cm}{
+                \includegraphics[width=2.67cm, height=2.67cm]{logo.png}
+                \marginbox{2cm 0cm 0cm 0cm}{\includegraphics[height=2.67cm]{logo2}}
+            }
+            \marginbox{0cm 0cm 0cm 3cm}{
+                \fontsize{42pt}{0}\selectfont
+                实 \enspace 验 \enspace 报 \enspace 告
+            }
+        \end{center}
+
+        \begin{table}[!b]
+            \fontsize{14pt}{0}\selectfont
+            \begin{tabularx}{\textwidth}{lXlX}
+                \rule{0pt}{36pt}
+                课程名称 & \multicolumn{3}{l}{} \\
+                \cline{2-4}
+                \rule{0pt}{36pt}
+                实验名称 & \multicolumn{3}{l}{} \\
+                \cline{2-4}
+                \rule{0pt}{36pt}
+                学生姓名 & \multicolumn{3}{l}{} \\
+                \cline{2-4}
+                \rule{0pt}{36pt}
+                学　　号 & \multicolumn{3}{l}{} \\
+                \cline{2-4}
+                \rule{0pt}{36pt}
+                学　　院 & {} & \quad 指导老师 & {} \\
+                \cline{2-2} \cline{4-4}
+                \rule{0pt}{36pt}
+            \end{tabularx}
+        \end{table}
+
+    \end{titlepage}
+
+    % 目录页
+    \tableofcontents
+    \clearpage
+
+    \section{实验目的}
+    \section{实验内容}
+    \section{实验过程及结果}
+    \section{实验分析及心得体会}
+
+\end{document}
