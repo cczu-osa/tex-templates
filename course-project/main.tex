@@ -1,0 +1,155 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{xfrac}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{minted}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{dblfloatfix}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{caption}
+
+% 设置页面
+\geometry{hmargin=3.18cm, vmargin=2.54cm} % 页边距
+\pagestyle{fancy}
+\fancyhf{}
+\chead{常州大学课程设计} % 页眉
+\renewcommand{\headwidth}{\textwidth} % 页眉分割横线
+\cfoot{第 \thepage 页，共 \pageref{LastPage} 页} % 页脚，显示页码
+
+% 设置字体
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setCJKsansfont{Noto Sans CJK SC}
+\setmonofont[Scale=0.95]{Noto Sans Mono}
+\setCJKmonofont[Scale=0.95]{Noto Sans Mono CJK SC}
+
+% 设置代码默认显示效果
+\setminted{autogobble, baselinestretch=1, breaklines, frame=lines, framesep=4mm, style=vs, stripnl, tabsize=4}
+\newfloat{snippet}{p}{}
+\floatname{snippet}{代码片段}
+\newcommand{\codeinline}{\mintinline{text}}
+\newmintedfile[cppfile]{cpp}{}
+\newmintedfile[javafile]{java}{}
+
+% 设置图片目录
+\graphicspath{ {./images/} {./figures/} }
+
+% 设置表格
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+\begin{document}
+
+% 封面
+\begin{titlepage}
+
+    \begin{center}
+        \marginbox{0cm 0cm 0cm 3cm}{
+            \includegraphics[width=2.67cm, height=2.67cm]{logo.png}
+            \marginbox{2cm 0cm 0cm 0cm}{\includegraphics[height=2.67cm]{logo2}}
+        }
+        \marginbox{0cm 0cm 0cm 3cm}{
+            \fontsize{42pt}{0}\selectfont
+            课 \enspace 程 \enspace 设 \enspace 计
+        }
+    \end{center}
+
+    \begin{table}[!b]
+        \fontsize{14pt}{0}\selectfont
+        \begin{tabularx}{\textwidth}{lXlX}
+            \rule{0pt}{36pt}
+            课程名称 & \multicolumn{3}{l}{} \\
+            \cline{2-4}
+            \rule{0pt}{36pt}
+            题　　目 & \multicolumn{3}{l}{} \\
+            \cline{2-4}
+            \rule{0pt}{36pt}
+            学生姓名 & & \quad 学　　号 & \\
+            \cline{2-2} \cline{4-4}
+            \rule{0pt}{36pt}
+            学　　院 & & \quad 专业班级 & \\
+            \cline{2-2} \cline{4-4}
+            \rule{0pt}{36pt}
+            校内指导老师 & & \quad 专业技术职务 & \\
+            \cline{2-2} \cline{4-4}
+            \rule{0pt}{36pt}
+            校外指导老师 & & \quad 专业技术职务 & \\
+            \cline{2-2} \cline{4-4}
+            \rule{0pt}{36pt}
+        \end{tabularx}
+    \end{table}
+
+\end{titlepage}
+
+% 目录页
+\tableofcontents
+
+\clearpage
+\section{引言}
+
+\subsection{开发背景}
+
+\codeinline{some_function()} 是一个行内代码，下面是一个片段代码：
+
+\begin{minted}{python}
+    def main():
+        print('Hello, world!')
+\end{minted}
+
+常州大学的 logo 如图 \ref{fig:cczu}。
+
+\begin{figure}[htp]
+	\centering\includegraphics[width=0.9\textwidth]{cczu}
+	\caption{常州大学 logo}
+	\label{fig:cczu}
+\end{figure}
+
+代码片段 \ref{snippet:cpp-hello} 是一个有标号的代码片段。
+
+\begin{snippet}
+	\inputminted{cpp}{snippets/main.cpp}
+	\caption{C++ 的 Hello World 小程序}
+	\label{snippet:cpp-hello}
+\end{snippet}
+
+如果通篇经常使用同一编程语言，可以通过 \codeinline{\javafile{Filename.java}} 快速引入，见 TeX 源码第 41 和 42 行的 \codeinline{newmintedfile} 指令。引入效果见代码片段 \ref{snippet:java-hello}。
+
+\begin{snippet}
+	\inputminted{cpp}{snippets/Hello.java}
+	\caption{Java 的 Hello World 小程序}
+	\label{snippet:java-hello}
+\end{snippet}
+
+\clearpage
+\section{需求分析}
+
+\clearpage
+\section{涉及的关键技术}
+
+\clearpage
+\section{系统设计}
+
+\clearpage
+\section{系统实现}
+
+\clearpage
+\section{结论}
+
+\clearpage
+\section{参考资料}
+
+\begin{enumerate}
+    \item 第 1 项
+    \item 第 2 项
+\end{enumerate}
+
+\end{document}
