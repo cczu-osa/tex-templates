@@ -1,6 +1,5 @@
-\documentclass[a4paper, 11pt]{article}
+\documentclass[a4paper, 11pt]{ctexart}
 
-\usepackage[UTF8]{ctex}
 \usepackage{amsmath}
 \usepackage{xfrac}
 \usepackage{geometry}
@@ -17,6 +16,9 @@
 \usepackage{wrapfig}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{booktabs}
+\usepackage{chngcntr}
+\usepackage{mathptmx}
 
 % 设置页面
 \geometry{hmargin=3.18cm, vmargin=2.54cm} % 页边距
@@ -27,25 +29,42 @@
 \cfoot{第 \thepage 页，共 \pageref{LastPage} 页} % 页脚，显示页码
 
 % 设置字体
-\setmainfont{Noto Serif}
+\setmainfont{Noto Serif} % 如果没有安装 Noto 字体，可以把这三行注释掉，ctex 会使用默认 CJK 字体
 \setsansfont{Noto Sans}
 \setCJKsansfont{Noto Sans CJK SC}
-\setmonofont[Scale=0.95]{Noto Sans Mono}
-\setCJKmonofont[Scale=0.95]{Noto Sans Mono CJK SC}
+\setmonofont[Scale=0.95]{Consolas}
+\setCJKmonofont[Scale=0.95]{Microsoft YaHei}
 
 % 设置代码默认显示效果
-\setminted{autogobble, baselinestretch=1, breaklines, frame=lines, framesep=4mm, style=vs, stripnl, tabsize=4}
-\newfloat{snippet}{p}{}
-\floatname{snippet}{代码片段}
+\setminted{autogobble, baselinestretch=1, breaklines, frame=lines, framesep=3mm, style=vs, stripnl, tabsize=4}
+\floatname{listing}{代码清单}
 \newcommand{\codeinline}{\mintinline{text}}
 \newmintedfile[cppfile]{cpp}{}
 \newmintedfile[javafile]{java}{}
 
-% 设置图片目录
+% 设置图片
 \graphicspath{ {./images/} {./figures/} }
 
 % 设置表格
 \newcolumntype{C}{>{\centering\arraybackslash}X}
+
+% 设置标号
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{listing}{section}
+\counterwithin{equation}{section}
+
+% 修正代码清单的标题上边距
+\let\oldcaption\caption
+\makeatletter
+\renewcommand{\caption}[1]{
+    \ifnum\strcmp{\@currenvir}{listing}=0
+    \vspace{-0.3cm}\oldcaption{#1}
+    \else
+    \oldcaption{#1}
+    \fi
+}
+\makeatother
 
 \begin{document}
 
@@ -67,22 +86,22 @@
         \fontsize{14pt}{0}\selectfont
         \begin{tabularx}{\textwidth}{lXlX}
             \rule{0pt}{36pt}
-            课程名称 & \multicolumn{3}{l}{} \\
+            课程名称     & \multicolumn{3}{l}{}                        \\
             \cline{2-4}
             \rule{0pt}{36pt}
-            题　　目 & \multicolumn{3}{l}{} \\
+            题　　目     & \multicolumn{3}{l}{}                        \\
             \cline{2-4}
             \rule{0pt}{36pt}
-            学生姓名 & & \quad 学　　号 & \\
+            学生姓名     &                      & \quad 学　　号     & \\
             \cline{2-2} \cline{4-4}
             \rule{0pt}{36pt}
-            学　　院 & & \quad 专业班级 & \\
+            学　　院     &                      & \quad 专业班级     & \\
             \cline{2-2} \cline{4-4}
             \rule{0pt}{36pt}
-            校内指导老师 & & \quad 专业技术职务 & \\
+            校内指导老师 &                      & \quad 专业技术职务 & \\
             \cline{2-2} \cline{4-4}
             \rule{0pt}{36pt}
-            校外指导老师 & & \quad 专业技术职务 & \\
+            校外指导老师 &                      & \quad 专业技术职务 & \\
             \cline{2-2} \cline{4-4}
             \rule{0pt}{36pt}
         \end{tabularx}
@@ -90,44 +109,92 @@
 
 \end{titlepage}
 
+% 空白页，方便双面打印
+\clearpage
+\phantom{s}
+\thispagestyle{empty}
+
 % 目录页
+\clearpage
 \tableofcontents
+\thispagestyle{empty} % 隐藏目录页的页码
+
+% 空白页，方便双面打印
+\clearpage
+\phantom{s}
+\thispagestyle{empty}
 
 \clearpage
+\setcounter{page}{1} % 从正文第 1 页开始计算页码
 \section{引言}
 
 \subsection{开发背景}
 
-\codeinline{some_function()} 是一个行内代码，下面是一个片段代码：
+\codeinline{some_function('参数')} 是一个行内代码，下面是一个片段代码：
 
 \begin{minted}{python}
     def main():
         print('Hello, world!')
 \end{minted}
 
-常州大学的 logo 如图 \ref{fig:cczu}。
+常州大学的 logo 如图 \ref{fig:cczu}，这里使用了 \codeinline{\ref{fig:cczu}} 来引用图片标号。
 
 \begin{figure}[htp]
-	\centering\includegraphics[width=0.9\textwidth]{cczu}
-	\caption{常州大学 logo}
-	\label{fig:cczu}
+    \centering\includegraphics[width=0.5\textwidth]{cczu}
+    \caption{常州大学 logo}
+    \label{fig:cczu}
 \end{figure}
 
-代码片段 \ref{snippet:cpp-hello} 是一个有标号的代码片段。
+代码清单 \ref{snippet:cpp-hello} 是一个有标号的代码清单。
 
-\begin{snippet}
-	\inputminted{cpp}{snippets/main.cpp}
-	\caption{C++ 的 Hello World 小程序}
-	\label{snippet:cpp-hello}
-\end{snippet}
+\begin{listing}[htp]
+    \inputminted{cpp}{snippets/main.cpp}
+    \caption{C++ 的 Hello World 小程序}
+    \label{snippet:cpp-hello}
+\end{listing}
 
-如果通篇经常使用同一编程语言，可以通过 \codeinline{\javafile{Filename.java}} 快速引入，见 TeX 源码第 41 和 42 行的 \codeinline{newmintedfile} 指令。引入效果见代码片段 \ref{snippet:java-hello}。
+如果通篇经常使用同一编程语言，可以通过 \codeinline{\javafile{Filename.java}} 快速引入，见 \TeX 源码第 41 和 42 行的 \codeinline{newmintedfile} 指令。引入效果见代码清单 \ref{snippet:java-hello}。
 
-\begin{snippet}
-	\inputminted{cpp}{snippets/Hello.java}
-	\caption{Java 的 Hello World 小程序}
-	\label{snippet:java-hello}
-\end{snippet}
+\begin{listing}[htp]
+    \inputminted{cpp}{snippets/Hello.java}
+    \caption{Java 的 Hello World 小程序}
+    \label{snippet:java-hello}
+\end{listing}
+
+\subsection{目标}
+
+表 \ref{tab:student-table} 是一个学生信息表。
+
+\begin{table}[htp]
+    \centering
+    \begin{tabularx}{\textwidth}{XXX}
+        \toprule  %添加表格头部粗线
+        姓名 & 学号 & 性别 \\
+        \midrule  %添加表格中横线
+        小明 & 001  & 男   \\
+        小红 & 002  & 女   \\
+        \bottomrule %添加表格底部粗线
+    \end{tabularx}
+    \caption{学生信息}
+    \label{tab:student-table}
+\end{table}
+
+下面是个数学公式：
+
+\begin{equation}
+    \Gamma(\alpha) = \int_{0}^{+\infty} x^{\alpha - 1} e^{-x} \,dx (\alpha > 0)
+    \label{eq:gamma-fn}
+\end{equation}
+
+公式 \ref{eq:gamma-fn} 是 $\Gamma$ 函数。
+
+再展示一个行内公式 $f(x) = ax + b$。以及没有标号的块公式：
+
+$$
+E = mc^2
+$$
+
+本段是使用英文标点的例子, 因为在数学语境下常常需要用英文标点. \LaTeX 会正确地在英文标点和汉字之间加一些间距, 就像数学书上那样. 再来测试一个行内公式: $\int \cos x \,dx = \sin x$.
 
 \clearpage
 \section{需求分析}
