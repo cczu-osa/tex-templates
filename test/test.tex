@@ -1,0 +1,73 @@
+\documentclass[a4paper, 11pt]{ctexart}
+
+\input{../preamble.tex}
+
+\title{一篇 \LaTeX 的测试文章}
+\author{某某某}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\clearpage
+
+\tableofcontents
+\thispagestyle{empty}
+
+\clearpage
+\setcounter{page}{1}
+
+\section{数学相关}
+
+\subsection{基本}
+
+数学相关的文章通常使用英文标点, \LaTeX 能正确处理中英文字和标点混杂的情况, 比如本 section 使用的是英文标点.
+
+下面是个带标号的数学公式:
+
+\begin{equation}
+    \Gamma(\alpha) = \int_{0}^{+\infty} x^{\alpha - 1} e^{-x} \,dx (\alpha > 0)
+    \label{eq:gamma-fn}
+\end{equation}
+
+公式 \ref{eq:gamma-fn} 是 $\Gamma$ 函数.
+
+这一个行内公式: $f(x) = ax + b$, 以及另一个: $\int \cos x \,dx = \sin x$. 下面是没有标号的块公式:
+
+$$
+    E = mc^2
+$$
+
+\subsection{定理, 推论, 例题}
+
+\begin{theorem}
+    这里是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长定理.
+    \label{th:1}
+\end{theorem}
+
+定理 \ref{th:1} 同样可以通过 \codeinline{\ref} 引用标号.
+
+\begin{proof}
+    这里是定理 \ref{th:1} 的证明.
+\end{proof}
+
+\begin{example}
+    这是一个例题. 包含一个公式:
+
+    \begin{equation}
+        \Gamma(\alpha) = \int_{0}^{+\infty} x^{\alpha - 1} e^{-x} \,dx (\alpha > 0)
+    \end{equation}
+
+    \label{eg:1}
+\end{example}
+
+\begin{solution}
+    这是例 \ref{eg:1} 的解.
+\end{solution}
+
+\begin{remark}
+    这是一个注.
+\end{remark}
+
+\end{document}

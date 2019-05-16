@@ -1,0 +1,70 @@
+\usepackage{xfrac}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{minted}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{dblfloatfix}
+\usepackage{hyperref}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{chngcntr}
+\usepackage{amsmath}
+\usepackage{ntheorem}
+\usepackage[nottoc]{tocbibind}
+
+% 设置页面
+\geometry{hmargin=3.18cm, vmargin=2.54cm} % 页边距
+
+% 设置字体
+\setmainfont{Noto Serif} % 如果没有安装 Noto 字体，可以把这三行注释掉，ctex 会使用默认 CJK 字体
+\setsansfont{Noto Sans}
+\setCJKsansfont{Noto Sans CJK SC}
+\setmonofont[Scale=0.95]{Consolas}
+\setCJKmonofont[Scale=0.95]{Microsoft YaHei}
+
+% 设置代码默认显示效果
+\setminted{autogobble, baselinestretch=1, breaklines, frame=lines, framesep=3mm, style=vs, stripnl, tabsize=4}
+\floatname{listing}{代码清单}
+\newcommand{\codeinline}{\mintinline{text}}
+
+% 修正代码清单的标题上边距
+\let\oldcaption\caption
+\makeatletter
+\renewcommand{\caption}[1]{
+    \ifnum\strcmp{\@currenvir}{listing}=0
+    \vspace{-0.3cm}\oldcaption{#1}
+    \else
+    \oldcaption{#1}
+    \fi
+}
+\makeatother
+
+% 设置表格
+\newcolumntype{C}{>{\centering\arraybackslash}X}
+
+% 设置标号
+\counterwithin{figure}{section}
+\counterwithin{table}{section}
+\counterwithin{listing}{section}
+\counterwithin{equation}{section}
+
+% 设置定理、例题等特殊块
+\theoremstyle{plain}
+\theoremheaderfont{\kern+2em\normalfont\bfseries} % 首行缩进 2 格
+\theorembodyfont{\normalfont\bfseries} % 定义、定理使用粗体
+\newtheorem{definition}{定义}[section]
+\newtheorem{theorem}{定理}[section]
+\newtheorem{corollary}{推论}[theorem]
+\newtheorem{lemma}[theorem]{引理}
+\theorembodyfont{\normalfont} % 其它使用正常字体
+\newtheorem*{proof}{证明}
+\newtheorem{example}{例}[section]
+\newtheorem*{solution}{解}
+\newtheorem*{remark}{注}
